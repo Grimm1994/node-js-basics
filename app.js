@@ -1,14 +1,13 @@
-import EventEmitter from "events";
+import { createServer } from "http"
 
-const customEmmiter = new EventEmitter()
+// const server = createServer((req, res) => {
+//     res.end('Welcome')
+// })
 
-customEmmiter.on("response", (data) => {
-    console.log(`data received`, data.name);
+const server = createServer()
+
+server.on("request", (req, res) => {
+    res.end("Welcome 11")
 })
 
-customEmmiter.on("response", () => {
-    console.log(`data received 1`);
-})
-
-
-customEmmiter.emit('response', {name: "grr", age: 12})
+server.listen(5001)
