@@ -1,6 +1,41 @@
-const _ = require("lodash")
+const { readFile, writeFile } = require("fs").promises
 
-const items = [1, [2, [3, [4]]]]
-const newItems = _.flattenDeep(items)
+const start = async () => {
+    try {
+        const first = await readFile("./content/first.txt", "utf-8")
+        const second = await readFile("./content/second.txt", "utf-8")
 
-console.log(newItems)
+        await writeFile(
+            "./content/result-mind-grenade.txt",
+            `This is awesome: ${first} ${second}\r`,
+            { flag: "a" }
+        )
+
+        console.log(first, second)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+start()
+
+// getText("./content/first.txt")
+//     .then((result) => console.log(result))
+//     .catch((err) => console.log(err))
+
+// const getText = (path) => {
+//     return new Promise((resolve, reject) => {
+//         readFile(path, "utf-8", (err, data) => {
+//             if (err) {
+//                 reject(err)
+//             } else {
+//                 resolve(data)
+//             }
+//         })
+//     })
+// }
+
+// const util = require("util")
+
+// const readFilePromise = util.promisify(readFile)
+// const writeFilePromise = util.promisify(writeFile)
